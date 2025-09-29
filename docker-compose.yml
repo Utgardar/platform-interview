@@ -1,10 +1,12 @@
-version: '3'
+version: "3"
 
 networks:
   development:
+  staging:
   production:
 services:
   vault-development:
+    hostname: vault-development
     networks:
       - development
     image: hashicorp/vault:1.19
@@ -14,7 +16,19 @@ services:
       - "8201:8200"
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=f23612cf-824d-4206-9e94-e31a6dc8ee8d
+  vault-staging:
+    hostname: vault-staging
+    networks:
+      - staging
+    image: hashicorp/vault:1.19
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8401:8200"
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=a1b2c3d4-5678-90ab-cdef-1234567890ab
   vault-production:
+    hostname: vault-production
     networks:
       - production
     image: hashicorp/vault:1.19
