@@ -22,6 +22,23 @@ locals {
 }
 ```
 
+As result Atlantis configuration will look like:
+
+```yaml
+projects:
+...
+  - name: app_development
+    dir: app
+    workspace: development
+  - name: app_staging
+    dir: app
+    workspace: staging
+  - name: app_production
+    dir: app
+    workspace: production
+
+```
+
 In this case `terraform.workspace` should be equal one of the keys in map.
 
 Actual application deployment setup Vault audit, Vault auth backend, and does `for_each` loop for every container we need to create for our platform environment.
